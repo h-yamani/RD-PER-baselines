@@ -131,6 +131,7 @@ if __name__ == "__main__":
 	episode_num = 0
 
 	historical_reward = {"step": [], "episode_reward": []}
+	startTime = time.time()
 
 	for t in range(int(args.max_timesteps)):
 		
@@ -162,8 +163,8 @@ if __name__ == "__main__":
 
 		if done or truncated:
 			# +1 to account for 0 indexing. +0 on ep_timesteps since it will increment +1 even if done=True
-			print(f"Total T: {t+1} Episode Num: {episode_num+1} Episode T: {episode_timesteps} Reward: {episode_reward:.3f}")
-
+			print(f"Total T: {t+1} Episode Num: {episode_num+1} Episode T: {episode_timesteps} Reward: {episode_reward:.3f}  Episode time : {time.time()- startTime}")
+			startTime = time.time()
 			historical_reward["step"].append(t)
 			historical_reward["episode_reward"].append(episode_reward)
 
@@ -185,7 +186,7 @@ if __name__ == "__main__":
 			done = False
 			episode_reward = 0
 			episode_timesteps = 0
-			episode_num += 1 
+			episode_num += 1
 
 		# Evaluate episode
 		if (t + 1) % args.eval_freq == 0:

@@ -14,7 +14,7 @@ class Args():
             "--test", type=bool, default=False
         )
         parser.add_argument(
-            "--getfig", type=bool, default=False
+            "--getfig", type=bool, default=True
         )
         parser.add_argument(
             "--suffix", type=str, default='9',
@@ -25,7 +25,7 @@ class Args():
             "--off-render", dest="render", action="store_false", help="turn off rendering"
         )
         parser.add_argument(
-            "--interim-test-num", type=int, default=1, help="interim test number"
+            "--interim-test-num", type=int, default=10, help="interim test number"
         )
         """ Replay Buffer Setup """
 
@@ -39,7 +39,7 @@ class Args():
             "--savefolder", type=str, default='test', help="save_folder_for_csv"
         )
         parser.add_argument(
-            "--evalstep", type=int, default=5000,
+            "--evalstep", type=int, default=10000,
         )
         parser.add_argument(
             "--savealgname", type=str, default='',
@@ -47,13 +47,13 @@ class Args():
         args = parser.parse_args()
 
         self.args = args
-        if self.args.envname == 'Pendulum-v1':
+        if self.args.envname == 'Pendulum-v4':
             self.args.max_episode_steps = 200
-        elif self.args.envname == 'LunarLanderContinuous-v2':
+        elif self.args.envname == 'LunarLanderContinuous-v4':
             self.args.max_episode_steps = 1000
-        elif self.args.envname == 'BipedalWalker-v3':
+        elif self.args.envname == 'BipedalWalker-v4':
             self.args.max_episode_steps = 1600
-        elif self.args.envname == 'BipedalWalkerHardcore-v3':
+        elif self.args.envname == 'BipedalWalkerHardcore-v4':
             self.args.max_episode_steps = 2000
         else:
             self.args.max_episode_steps = 1000

@@ -12,14 +12,15 @@ from SAC import SAC
 from LA3P_SAC import LA3P_SAC
 import utils
 import csv
+import time
 
 
 # SAC tuned hyper-parameters are imported from the original paper: https://arxiv.org/abs/1801.01290
 def reward_scale_dict(args):
     if args.env == "Humanoid-v2":
-        args.reward_scale = 20
+        args.reward_scale = 1
     else:
-        args.reward_scale = 5
+        args.reward_scale = 1
 
     return args
 
@@ -170,7 +171,7 @@ if __name__ == "__main__":
 
     done = False
     truncated = False
-
+    startTime = time.time()
     for t in range(int(args.num_steps)):
         episode_timesteps += 1
 
@@ -198,8 +199,8 @@ if __name__ == "__main__":
                 agent.update_parameters(replay_buffer, updates, args.batch_size)
         if done or truncated:
             print(
-                f"Total T: {t+1} Episode Num: {episode_num + 1} Episode T: {episode_timesteps}" f" Reward: {episode_reward:.3f}")
-
+                f"Total T: {t+1} Episode Num: {episode_num + 1} Episode T: {episode_timesteps}" f" Reward: {episode_reward:.3f} Episode time : {time.time()- startTime}")
+            startTime = time.time()
             historical_reward["step"].append(t+1)
             historical_reward["episode_reward"].append(episode_reward)
 

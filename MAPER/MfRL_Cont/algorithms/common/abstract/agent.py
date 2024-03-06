@@ -283,7 +283,7 @@ class AgentBase(nn.Module):
             historical_reward["episode_reward"].append(sum_of_rewards)
 
             # Specify the file name for the .csv file
-            file_name = "original_aug_Halfcheetah-v4_horigin_seed10_1m.csv"
+            file_name = self.fname
 
             rl_data = historical_reward
 
