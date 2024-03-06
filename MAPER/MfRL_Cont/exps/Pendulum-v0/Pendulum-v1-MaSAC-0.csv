@@ -1,4 +1,0 @@
-,all_scores,all_stdev,total_steps,mean_q,mean_td,mean_s,mean_a,mean_o,num_mb,true_returns,eval_q1,eval_q2,total_rew_diff1,total_rew_diff2,total_tran_diff1,total_tran_diff2,total_td1_diff1,total_td2_diff2,mean_r,total_num
-0,-986.4123148560078,0.0,0,0.0,0.0,0.0,0.0,0.0,,-242.1802333942131,,,,,,,,,0.0,0
-1,-1704.329061200563,0.0,5000,0.0,0.0,0.0,0.0,0.0,,-420.99128823245024,,,,,,,,,0.0,0
-2,-1320.36737627006,0.0,10000,-4.145683462615125,3.165889859898016,0.6851915351580828,0.0,0.0,,-327.1569995280958,,,,,,,,,7.999840576201677,0

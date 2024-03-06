@@ -19,11 +19,13 @@ class AgentBase(nn.Module):
         if not "MULTIPLE_LEARN" in self.hyper_params:
             self.hyper_params["MULTIPLE_LEARN"] = 1
         if self.args.savealgname == '':
-            self.fname = "{}-{}-{}.csv".format(self.args.envname, self.args.algo, self.args.suffix)
+            self.fname = "{}-{}-{}.csv".format(self.args.envname, self.args.algo, self.args.seed)
         else:
-            self.fname = f'{self.args.envname}-{self.args.savealgname}-{self.args.suffix}.csv'
+            self.fname = f'{self.args.envname}-{self.args.savealgname}-{self.args.seed}.csv'
         pathlib.Path('./exps').mkdir(exist_ok=True)
         pathlib.Path('./exps/' + self.args.savefolder).mkdir(exist_ok=True)
+        pathlib.Path('./exps/evaluation').mkdir(exist_ok=True)
+        self.evaluation_save_path = os.path.join('./exps/evaluation', 'eval_' + self.fname)
         self.save_path = os.path.join('./exps/' + self.args.savefolder, self.fname)
         my_dict = self.args.__dict__
         with open(self.save_path.replace(".csv", ".txt"), "w") as f:
@@ -115,6 +117,9 @@ class AgentBase(nn.Module):
         self.total_eval_td1.append(np.mean(self.episode_td1))
         self.total_eval_td2.append(np.mean(self.episode_td2))
 
+        dataframe1 = pd.DataFrame([])
+        #dataframe1['Step'] = np.nan
+        #dataframe1['episode_reward'] = np.nan
         dataframe = pd.DataFrame([])
         dataframe['all_scores'] = np.nan
         dataframe['all_stdev'] = np.nan
@@ -155,7 +160,10 @@ class AgentBase(nn.Module):
         dataframe['total_td2_diff2'] = pd.Series(np.array(self.total_eval_td2))
 
         dataframe['total_num'] = pd.Series(np.array(self.total_num))
+        dataframe1['Step'] = pd.Series(np.array(self.total_steps))
+        dataframe1['episode_reward'] = pd.Series(np.array(self.total_scores))
         dataframe.to_csv(self.save_path)
+        dataframe1.to_csv(self.evaluation_save_path, header=True, index=False)
 
     def interimtest(self):
         """Common test routine."""
