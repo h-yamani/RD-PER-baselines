@@ -17,8 +17,8 @@ td3_exp_hyper_params = {
     "PER_ALPHA": 0.7,
     "PER_BETA": 0.4,
     "PER_EPS": 1e-6,
-    "MULTIPLE_LEARN": 1,
-    "TRAIN_FREQ": 1,
+    "MULTIPLE_LEARN": 64,
+    "TRAIN_FREQ": 64,
 }
 td3_test_hyper_params = {
     "ACTOR_SIZE": [400, 300],
@@ -39,8 +39,8 @@ td3_test_hyper_params = {
     "PER_ALPHA": 0.7,
     "PER_BETA": 0.4,
     "PER_EPS": 1e-6,
-    "MULTIPLE_LEARN": 1,
-    "TRAIN_FREQ": 1,
+    "MULTIPLE_LEARN": 64,
+    "TRAIN_FREQ": 64,
 }
 sac_exp_hyper_params = {
     "ACTOR_SIZE": [400, 300],
