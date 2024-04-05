@@ -62,7 +62,7 @@ if __name__ == "__main__":
     parser.add_argument("--eval_freq", default=1e4, metavar='N', help='Evaluation period in number of time steps (default: 1000)')
     parser.add_argument("--max_time_steps", default=1000000, type=int, metavar='N', help='Maximum number of steps (default: 1000000)')
     parser.add_argument("--exploration_noise", default=0.1, metavar='G', help='Std of Gaussian exploration noise')
-    parser.add_argument("--batch_size", default=32, metavar='N', help='Batch size (default: 256)')
+    parser.add_argument("--batch_size", default=256, metavar='N', help='Batch size (default: 256)')
     parser.add_argument("--discount", default=0.99, metavar='G', help='Discount factor for reward (default: 0.99)')
     parser.add_argument("--tau", default=0.005, type=float, metavar='G', help='Learning rate in soft/hard updates of the target networks (default: 0.005)')
     parser.add_argument("--policy_noise", default=0.2, metavar='G', help='Noise added to target policy during critic update')
