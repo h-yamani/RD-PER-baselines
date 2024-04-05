@@ -127,7 +127,7 @@ class MaTD3(TD3Agent):
             self.mean_s += np.mean(numpy_s)
 
             # Obtain TD erros and Q for priorities update
-            if any([f in self.args.algo for f in ['PER', 'NERS', 'ERO']]):
+            #if any([f in self.args.algo for f in ['PER', 'NERS', 'ERO']]):
                 new_priorities = np.array(
                     [numpy_next_q_value,
                      numpy_td + self.scale_s * numpy_s + self.scale_r * numpy_r])
