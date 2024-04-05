@@ -10,9 +10,9 @@ class Actor(nn.Module):
     def __init__(self, state_dim, action_dim, max_action):
         super(Actor, self).__init__()
 
-        self.l1 = nn.Linear(state_dim, 1024)
-        self.l2 = nn.Linear(1024, 1024)
-        self.l3 = nn.Linear(1024, action_dim)
+        self.l1 = nn.Linear(state_dim, 256)
+        self.l2 = nn.Linear(256, 256)
+        self.l3 = nn.Linear(256, action_dim)
 
         self.max_action = max_action
 
@@ -35,14 +35,14 @@ class Critic(nn.Module):
         super(Critic, self).__init__()
 
         # Q1 architecture
-        self.l1 = nn.Linear(state_dim + action_dim, 1024)
-        self.l2 = nn.Linear(1024, 1024)
-        self.l3 = nn.Linear(1024, 1)
+        self.l1 = nn.Linear(state_dim + action_dim, 256)
+        self.l2 = nn.Linear(256,256)
+        self.l3 = nn.Linear(256, 1)
 
         # Q2 architecture
-        self.l4 = nn.Linear(state_dim + action_dim, 1024)
-        self.l5 = nn.Linear(1024, 1024)
-        self.l6 = nn.Linear(1024, 1)
+        self.l4 = nn.Linear(state_dim + action_dim, 256)
+        self.l5 = nn.Linear(256,256)
+        self.l6 = nn.Linear(256, 1)
 
     def forward(self, state, action):
         sa = torch.cat([state, action], 1)
@@ -79,18 +79,18 @@ class LA3P_TD3(object):
             policy_noise=0.2,
             noise_clip=0.5,
             policy_freq=2,
-            alpha=   0.7, #0.4
+            alpha= 0.4,
             min_priority=1
     ):
         self.device = device
 
         self.actor = Actor(state_dim, action_dim, max_action).to(self.device)
         self.actor_target = copy.deepcopy(self.actor)
-        self.actor_optimizer = torch.optim.Adam(self.actor.parameters(), lr=1e-4)
+        self.actor_optimizer = torch.optim.Adam(self.actor.parameters(), lr=3e-4)
 
         self.critic = Critic(state_dim, action_dim).to(self.device)
         self.critic_target = copy.deepcopy(self.critic)
-        self.critic_optimizer = torch.optim.Adam(self.critic.parameters(), lr=1e-3)
+        self.critic_optimizer = torch.optim.Adam(self.critic.parameters(), lr=3e-4)
 
         self.max_action = max_action
         self.discount = discount
