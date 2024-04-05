@@ -49,14 +49,14 @@ if __name__ == "__main__":
 
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--algorithm", default="LAP_TD3")			# Algorithm nameu
-	parser.add_argument("--env", default="Hopper-v4")			# OpenAI gym environment name
+	parser.add_argument("--env", default="HalfCheetah-v4")			# OpenAI gym environment name
 	parser.add_argument("--seed", default=571, type=int)				# Sets Gym, PyTorch and Numpy seeds
 	parser.add_argument("--start_timesteps", default=1e3, type=int)# Time steps initial random policy is used
 	parser.add_argument("--gpu", default="0", type=int, help='GPU ordinal for multi-GPU computers (default: 0)')
 	parser.add_argument("--eval_freq", default=1e4, type=int)		# How often (time steps) we evaluate
 	parser.add_argument("--max_timesteps", default=1e6, type=int)	# Max time steps to run environment
 	parser.add_argument("--expl_noise", default=0.1)				# Std of Gaussian exploration noise
-	parser.add_argument("--batch_size", default=32, type=int)		# Batch size for both actor and critic
+	parser.add_argument("--batch_size", default=256, type=int)		# Batch size for both actor and critic
 	parser.add_argument("--discount", default=0.99)					# Discount factor
 	parser.add_argument("--tau", default=0.005)						# Target network update rate
 	parser.add_argument("--policy_noise", default=0.2)				# Noise added to target policy during critic update
