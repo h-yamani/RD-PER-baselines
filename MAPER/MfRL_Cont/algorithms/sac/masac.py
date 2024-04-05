@@ -119,18 +119,18 @@ class MaSAC(SACAgent):
 
             numpy_next_q_value = next_q_value[:, 0].detach().data.cpu().numpy()
 
-            if any([f in self.args.algo for f in ['PER', 'NERS', 'ERO']]):
+            """if any([f in self.args.algo for f in ['PER', 'NERS', 'ERO']]):
                 if 'PER' in self.args.algo:
                     new_priorities = np.array(
                         [numpy_next_q_value,
                          numpy_td])
-                else:
-                    new_priorities = np.array(
+                else:"""
+            new_priorities = np.array(
                         [numpy_next_q_value,
                          numpy_td + self.scale_s * numpy_s + self.scale_r * numpy_r])
 
-                indices = np.array(indices)
-                self.memory.update_priorities(indices, new_priorities)
+            indices = np.array(indices)
+            self.memory.update_priorities(indices, new_priorities)
             self.mean_td += np.mean(numpy_td)
             self.mean_q += np.mean(numpy_next_q_value)
             self.mean_r += np.mean(numpy_r)
